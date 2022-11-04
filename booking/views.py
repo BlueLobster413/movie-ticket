@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms import formset_factory,modelformset_factory
+from webadmin.models import film
 
 # Create your views here.
 def index(request):
@@ -10,17 +11,31 @@ def index(request):
             """
     return HttpResponse(message)
 
-def index2(request):
+def home(request):
     context = {}
-    return render(request,"index.html",context)
+    movies = film.objects.values_list('id','movie_name','url', named=True)
+    context = {
+    'films': movies
+    }
+    return render(request,"index.html", context)
 
 def login(request):
-    context = {}
-    return render(request,"user_login.html",context)
+    if (request.method == "POST"):
+        email = request.POST.get('email')
+        passw = request.POST.get('pass')
+
+    return render(request,"user_login.html")
 
 def signup(request):
-    context = {}
-    return render(request,"user_signup.html",context)
+
+    if (request.method == "POST"):
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        age = request.POST.get('age')
+        email = request.POST.get('fname')
+        passw = request.POST.get('pass')
+
+    return render(request,"user_signup.html")
 
 def movie_detail(request):
     context = {}
@@ -31,7 +46,7 @@ def show_select(request):
     return render(request,"show_selection.html",context)
 
 def seat_select(request):
-    context = {}
+    context = {} 
     return render(request,"seat_selection.html",context)
 
 def checkout(request):

@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import *
+# from django.forms import *
 
 # Create your models here.
 # class admins(models.Model):
@@ -13,14 +13,21 @@ from django.forms import *
 # 	def __str__(self):
 # 		return self.title
 
-# class films(models.Model):
-#     movie_name = models.CharField(max_length = 100)
-#     start_date = models.DateField()
-#     end_date = models.DateField()
-#     active = models.BooleanField()
-#     show_times = models.CharField(max_length = 100)
-#     price = models.IntegerField()
-    
-#     def __str__(self):
-#         return self.title
+class film(models.Model):
+
+    movie_name = models.CharField(max_length = 100)
+    movie_lang = models.CharField(blank=True, null=True,max_length = 100)
+    movie_year = models.IntegerField(blank=True, null=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    showtime1 = models.TimeField(auto_now=False, auto_now_add=False)
+    showtime2 = models.TimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
+    showtime3 = models.TimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
+    price = models.IntegerField()
+    url = models.URLField(blank=True, null=True)
+    active = models.BooleanField()
+    date_added = models.DateField(auto_now=False, auto_now_add=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.movie_name
 

@@ -1,17 +1,20 @@
+# from this import d
 from django.db import models
 from django import forms
+from django.contrib.auth.models import AbstractUser
+from traitlets import default
+
+# class Users(AbstractUser):
+#     is_theatre_staff = models.BooleanField('staff status', default=False)
+
 
 # Create your models here.
 # class users(models.Model):
-# 	# fields of the model
-# 	firstname = models.CharField(max_length = 20) # a title field
-# 	lastname = models.CharField(max_length = 20) # a title field
-# 	email = models.EmailField(max_length=50) # a description field
-# 	date_created = models.DateTimeField(auto_now_add = True) # a datetime field
-# 	# password = models.CharField(max_length=20, widget=forms.PasswordInput)
-# 	# with their title name
-# 	def __str__(self):
-# 		return self.title
-
-# class bookings(models.Model):
-#     pass
+#     firstname = models.CharField(max_length = 20,default="")
+#     lastname = models.CharField(max_length = 20,default="")
+#     email = models.EmailField(max_length=50)
+#     age = models.IntegerField(default=0)
+#     date_created = models.DateTimeField(auto_now_add = True)
+#     password = models.CharField(max_length=20, default="")
+#     def __str__(self):
+#         return self.title

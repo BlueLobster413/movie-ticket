@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Welcome - Movie Tickets Booking Website</title>
+        <title>Movies - Movie Tickets Booking Website</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon4.png' %}" />
         <!-- Bootstrap icons-->
@@ -23,10 +23,10 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="#!">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="#!">Movies</a></li>
-                        <li class="nav-item"><a class="nav-link " href="#!">Bookings</a></li>
-                        <li class="nav-item"><a class="nav-link " href="#!">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/admin">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="movies">Movies</a></li>
+                        <li class="nav-item"><a class="nav-link " href="bookings">Bookings</a></li>
+                        <li class="nav-item"><a class="nav-link " href="users">Users</a></li>
                         {% comment %} <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -47,10 +47,13 @@
                 </div>
             </div>
         </nav>
+        
     <div class="container">
         <div class="container col-md-12">
             <h3>Movies Table</h3>
-            <p>This table contains all the movies</p>
+            <p>
+              <a class='btn btn-dark' href="addfilm">Add Movie</a>
+            </p>
         </div>
         <div class="row">
             
@@ -99,6 +102,12 @@
                     </div>
                 </div>
         </div>
+        <!-- Table Raw Output  start -->
+
+        {% comment %} <p>The queryset object:</p>
+        {{ films }} {% endcomment %}
+        
+        <!-- end -->
         <table class="table table-striped">
             <thead>
               <tr>
@@ -109,16 +118,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Avatar</td>
-                <td>20/05/2022</td>
-                <td>
-                    <a href="#">preview</a>
-                    <a href="#">edit</a>
-                    <a href="#">delete</a>
-                </td>
-              </tr>
+              {% for film in films %}
+                <tr>
+                  <th scope="row">{{ film.id }}</th>
+                  <td>{{ film.movie_name }}</td>
+                  <td>{{ film.date_added }}</td>
+                  <td>
+                      <a href="#">preview</a>
+                      <a href="#">edit</a>
+                      <a href="#">delete</a>
+                  </td>
+                </tr>
+                {% endfor %}
               <tr>
                 <th scope="row">1</th>
                 <td>Batman</td>

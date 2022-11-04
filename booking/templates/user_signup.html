@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - Movie Tickets Booking Website</title>
+        <title>Signup - Movie Tickets Booking Website</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon4.png' %}" />
         <!-- Bootstrap icons-->
@@ -60,35 +60,36 @@
         <div class="card-text">
           <!--
           <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
-          <form>
+          <form method="post" action="/signup">
+            {% csrf_token %}
             <!-- to error: add class "has-danger" -->
             <div class="form-group">
               <label for="FirstName">First Name</label>
-              <input type="text" class="form-control form-control-sm" id="FirstName" aria-describedby="emailHelp" required="True">
+              <input type="text" name="fname" class="form-control form-control-sm" id="FirstName" aria-describedby="emailHelp" required="True">
             </div>
             <div class="form-group">
               <label for="LastName">Last Name</label>
               {% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
-              <input type="text" class="form-control form-control-sm" id="LastName" required="True">
+              <input type="text" name="lname" class="form-control form-control-sm" id="LastName" required="True">
             </div>
             <div class="form-group">
                 <label for="Age">Age</label>
                 {% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
-                <input type="number" class="form-control form-control-sm" id="Age" required="True">
+                <input type="number" name="age" class="form-control form-control-sm" id="Age" required="True">
               </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" required="True">
+                <input type="email" name="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" required="True">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 {% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
-                <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" required="True">
+                <input type="password" name="pass" class="form-control form-control-sm" id="exampleInputPassword1" required="True">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword2">Re-enter Password</label>
                 {% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
-                <input type="password" class="form-control form-control-sm" id="exampleInputPassword2" required="True">
+                <input type="password" name="pass2" class="form-control form-control-sm" id="exampleInputPassword2" required="True">
               </div>
               <button type="submit" class="btn btn-primary btn-block">Sign in</button>
             <div class="sign-up">
