@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add Film - Movie Tickets Booking Website</title>
+        <title>Edit Film - Movie Tickets Booking Website</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon4.png' %}" />
         <!-- Bootstrap icons-->
@@ -47,9 +47,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="/admin">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="movies">Movies</a></li>
-                    <li class="nav-item"><a class="nav-link " href="bookings">Bookings</a></li>
-                    <li class="nav-item"><a class="nav-link " href="users">Users</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/admin/movies">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link " href="/admin/bookings">Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link " href="/admin/users">Users</a></li>
                     {% comment %} <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -86,7 +86,7 @@
     <div class="col-md-6 container bg-default filmform" >
                 
         <h4 class="my-4" >
-               <span style="border-bottom:solid"> Add Film </span>
+               <span style="border-bottom:solid"> Edit Film </span>
         </h4>
 
         <p class="my-4" id="create_status" >
@@ -95,7 +95,7 @@
             {% endif %}
         </p>
         
-        <form action="addfilm" method="post">
+        <form action="#" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Movie Name</label>
@@ -103,7 +103,7 @@
                         {% comment %} <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>	 {% endcomment %}
-                        <input type="text" class="form-control" name="fn" id="username" placeholder="movie name" required>
+                        <input type="text" class="form-control" name="fn" value="{{ film.movie_name }}" id="username" placeholder="movie name" required>
                         <div class="invalid-feedback">
                             Your movie name is required.
                         </div>
@@ -113,7 +113,7 @@
             <div class="form-row">
                 <div class="col-md-6 form-group">
                     <label for="firstname">Language</label>
-                    <input type="text" class="form-control" name="fl" id="firstname"  placeholder="enter language">
+                    <input type="text" class="form-control" value="{{ film.movie_lang }}"  name="fl" id="firstname"  placeholder="enter language">
                     
                     {% comment %} <label for="firstname">Language</label>
                     <input type="text" class="form-control" name="fl" id="firstname" placeholder="language">
@@ -124,7 +124,7 @@
 
                 <div class="col-md-6 form-group">
                     <label for="lastname">Year</label>
-                    <input type="number" class="form-control" name="fy" id="lastname" placeholder="year">
+                    <input type="number" class="form-control" name="fy" value="{{ film.movie_year }}" id="lastname" placeholder="year">
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -135,7 +135,7 @@
             <div class="form-row">
                 <div class="col-md-6 form-group">
                     <label for="sdate">Startdate</label>
-                    <input type="date" class="form-control" name="fsd" id="sdate"  name="birthdaytime">
+                    <input type="date" class="form-control" name="fsd" id="sdate" value="{{ film.start_date|dformat:"%Y-%m-%d" }}"   name="birthdaytime">
                     {% comment %} <input type="text" class="form-control" id="sdate" placeholder="language"> {% endcomment %}
                     <div class="invalid-feedback">
                         Valid first name is required.
@@ -145,7 +145,7 @@
                 <div class="col-md-6 form-group">
                     <label for="edate">Enddate</label>
                     {% comment %} <input type="text" class="form-control" id="edate" placeholder="year"> {% endcomment %}
-                    <input type="date" class="form-control" name="fed" id="edate"  name="birthdaytime">
+                    <input type="date" class="form-control" name="fed" value="{{ film.end_date|dformat:"%Y-%m-%d" }}"  id="edate"  name="birthdaytime">
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -156,22 +156,22 @@
                 {% comment %} <label for="email">Showtimes</label> {% endcomment %}
                 <div class="col-md-4 form-group">
                     <label for="email1">Show time 1</label>
-                    <input type="time" class="form-control" name="fst1" value="12:20" id="email1" placeholder="movie showtimes" required>
+                    <input type="time" class="form-control" name="fst1" value="{{ film.showtime1|tformat:"%H:%M" }}" id="email1" placeholder="movie showtimes" required>
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="email2">Show time 2</label>
-                    <input type="time" class="form-control" name="fst2" value="15:05" id="email2" placeholder="movie showtimes" required>
+                    <input type="time" class="form-control" name="fst2" value="{{ film.showtime2|tformat:"%H:%M" }}" id="email2" placeholder="movie showtimes" required>
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="email3">Show time 3</label>
-                    <input type="time" class="form-control" name="fst3" value="18:00" id="email3" placeholder="movie showtimes" required>
+                    <input type="time" class="form-control" name="fst3" value="{{ film.showtime3|tformat:"%H:%M" }}" id="email3" placeholder="movie showtimes" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-4 form-group">
                     <label for="price">Price</label>
-                    <input type="number" class="form-control" name="fp" id="price" placeholder="price">
+                    <input type="price" class="form-control" name="fp" value="{{ film.price }}" id="price" placeholder="price">
                     <div class="invalid-feedback">
                         Valid first name is required.
                     </div>
@@ -179,7 +179,7 @@
 
                 <div class="col-md-8 form-group">
                     <label for="turl">Thumnail URL</label>
-                    <input type="url" class="form-control" name="fu" id="turl" placeholder="url">
+                    <input type="url" class="form-control" name="fu" value="{{ film.url }}" id="turl" placeholder="url">
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -188,7 +188,7 @@
                 {% comment %} <hr class="mb-4"> {% endcomment %}
                 <div class="col-md-2 form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="fa" value="0" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="fa" value="{{ film.active }}"  id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                           Active
                         </label>
@@ -199,7 +199,8 @@
                         Valid last name is required.
                     </div> {% endcomment %}
                 </div>
-                <button class="btn btn-dark bt-lg btn-block" type="submit">submit</button>
+                <button class="btn btn-success btn-md btn-block" type="submit">Apply Changes</button>
+                <a class="btn btn-danger btn-md btn-block" href="/admin/movies">Cancel</a>
                 <h1 class="mb-4">
         </form>
     </div>

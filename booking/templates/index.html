@@ -15,15 +15,14 @@
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <style>
-            .rootfilmcard{
-                
-              background: linear-gradient(
-                45deg,
-                rgba(29, 236, 197, 0.5),
-                rgba(91, 14, 214, 0.5) 100%
-              );
-            
+            body{
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
             }
+            .content {
+                flex: 1;
+             }
             .filmcards:hover {
                 opacity: 100%;
                 box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
@@ -37,13 +36,21 @@
                 left: 0;
                 z-index: 1;
               }
+              .fitimage {
+                width:100%;
+                height:100%;
+              }
+              .fitimage2 {
+                width:100%;
+                height:35vh;
+              }
         </style>
     </head>
-    <body>
+    <body class="h-100">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">LOGO</a>
+                <a class="navbar-brand" href="">LOGO</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -72,21 +79,22 @@
         <!-- Header-->
         
         <header >
+            <!-- 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="1" ></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner">
+                <div class="carousel-inner" style="height:80%;">
                   <div class="carousel-item active">
-                    <img class="d-block w-100" src="{% static 'assets/car2.png' %}" alt="First slide">
+                    <img class="d-block fitimage2" src="{% static 'assets/car2.png' %}" alt="First slide">
                   </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="{% static 'assets/car1.png' %}" alt="Second slide">
+                  <div class="carousel-item ">
+                    <img class="d-block fitimage2" src="{% static 'assets/car1.png' %}" alt="Second slide">
                   </div>
-                  <div class="carousel-item">
-                    <img class="d-block w-100" src="{% static 'assets/car3.png' %}" alt="Third slide">
+                  <div class="carousel-item ">
+                    <img class="d-block fitimage2" src="{% static 'assets/car3.png' %}" alt="Third slide">
                   </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -98,6 +106,8 @@
                   {% comment %} <span class="sr-only">Next</span> {% endcomment %}
                 </a>
             </div>
+            -->
+
             {% comment %} <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Shop in style</h1>
@@ -113,7 +123,7 @@
             {{ films }} {% endcomment %}
             
             <!-- end -->
-        <section class="py-5">
+        <section class="py-5 content">
 
             <div class="container px-4 px-lg-5 mt-5">
 
@@ -121,10 +131,10 @@
                     
                 {% for film in films %}
                     <div class="col mb-5 ">
-                        <a href="detail/pk={{ film.id }}">
+                        <a href="detail/{{ film.id }}">
                             {% comment %} <a href="detail"> {% endcomment %}
                         <div class="card h-100 filmcards" >
-                            <img class="card-img-top " style="width:100%;height:100%" src="{{ film.url }}" alt="..." />
+                            <img class="card-img-top fitimage img-thumbnail"  src="{{ film.url }}" alt="..." />
                             <div class="card-body p-1">
                                 <div class="text-center">
                                     <h5 class="fw">{{ film.movie_name }}</h5>
@@ -135,195 +145,9 @@
                     </div>
                 {% endfor %}
 
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="{% static 'assets/title1.png' %}" alt="..." />
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <h5 class="fw">Nope</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+            
 
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title2.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">The Green Knight</h5>
-                                    <!-- Product reviews-->
-                                    {% comment %} <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div> {% endcomment %}
-                                    <!-- Product price-->
-                                    {% comment %} <span class="text-muted text-decoration-line-through">$20.00</span> {% endcomment %}
-                                    {% comment %} $18.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title3.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">Batman</h5>
-                                    <!-- Product price-->
-                                    {% comment %} <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title5.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">Pulp Fiction</h5>
-                                    <!-- Product reviews-->
-                                    {% comment %} <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div> {% endcomment %}
-                                    <!-- Product price-->
-                                    {% comment %} $40.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title1.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">Nope</h5>
-                                    <!-- Product price-->
-                                    {% comment %} $40.00 - $80.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title2.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">The Green Knight</h5>
-                                    <!-- Product reviews-->
-                                    {% comment %} <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div> {% endcomment %}
-                                    <!-- Product price-->
-                                    {% comment %} <span class="text-muted text-decoration-line-through">$20.00</span> {% endcomment %}
-                                    {% comment %} $18.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title3.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">Batman</h5>
-                                    <!-- Product price-->
-                                    {% comment %} <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{% static 'assets/title5.png' %}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-1">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw">Pulp Fiction</h5>
-                                    <!-- Product reviews-->
-                                    {% comment %} <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div> {% endcomment %}
-                                    <!-- Product price-->
-                                    {% comment %} $40.00 {% endcomment %}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            {% comment %} <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

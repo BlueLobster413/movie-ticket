@@ -25,8 +25,11 @@ class film(models.Model):
     showtime3 = models.TimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
     price = models.IntegerField()
     url = models.URLField(blank=True, null=True)
-    active = models.BooleanField()
+    active = models.BooleanField(default=False)
     date_added = models.DateField(auto_now=False, auto_now_add=True, blank=True, null=True)
+    deleted = models.BooleanField(default=False)
+    
+
 
     def __str__(self):
         return self.movie_name

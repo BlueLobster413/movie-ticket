@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from .forms import filmForm
 from .models import film
 from django.contrib import messages
@@ -14,7 +14,7 @@ def login(request):
 
 def movies(request):
     context = {}
-    movies = film.objects.values_list('id','movie_name','date_added', named=True)
+    movies = film.objects.filter(deleted=False).values_list('id','movie_name','date_added', named=True)
     context = {
     'films': movies
     }
@@ -39,10 +39,38 @@ def add_movie(request):
         contact=film.objects.create(movie_name=fn,movie_lang=fl,movie_year=fy,start_date=fsd,end_date=fed,showtime1=fst1,
         showtime2=fst2,showtime3=fst3,price=fp,url=fu,active=fa)
         # messages.success(request, "Film sdded successfully")
-        pass
- 
+        context = {'message':"Success"}
+        
     # context['form']= form
-    return render(request,"create_movie.html")
+    return render(request,"create_movie.html",context)
+
+def edit_movie(request, id):
+    context = {}
+    context["film"] = film.objects.get(id = id)  
+    
+    if(request.method == "POST"):
+        fn=request.POST['fn']
+        fl=request.POST['fl']
+        fy=request.POST['fy']
+        fsd=request.POST['fsd']
+        fed=request.POST['fed']
+        fst1=request.POST['fst1']
+        fst2=request.POST['fst2']
+        fst3=request.POST['fst3']
+        fp=request.POST['fp']
+        fu=request.POST['fu']
+        fa=request.POST.get('fa', False);
+        film.objects.filter(id=id).update(movie_name=fn,movie_lang=fl,movie_year=fy,start_date=fsd,end_date=fed,showtime1=fst1,
+        showtime2=fst2,showtime3=fst3,price=fp,url=fu,active=fa)
+        return HttpResponseRedirect("/detail/"+str(id))
+
+    return render(request, "edit_movie.html", context)
+
+def delete_movie(request, id):
+    film.objects.filter(id=id).update(deleted=True)
+    return HttpResponseRedirect("/admin/movies")
+    
+
 
 def bookings(request):
     context = {}

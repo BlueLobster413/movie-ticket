@@ -13,7 +13,7 @@ def index(request):
 
 def home(request):
     context = {}
-    movies = film.objects.values_list('id','movie_name','url', named=True)
+    movies = film.objects.filter(deleted=False).values_list('id','movie_name','url', named=True)
     context = {
     'films': movies
     }
@@ -37,16 +37,30 @@ def signup(request):
 
     return render(request,"user_signup.html")
 
-def movie_detail(request):
+def movie_detail(request,id):
     context = {}
+    context["film"] = film.objects.get(id = id)  
     return render(request,"movie_detail.html",context)
 
 def show_select(request):
     context = {}
+    if(request.method == "GET" and len(request.GET)!=0):
+        # print("get raised")
+        date = request.GET['date']
+        films = film.objects.filter(start_date__lte=date).values_list('id','movie_name','url','showtime1','showtime2','showtime3', named=True)
+        context = {'films':films,'date':date}
+    
     return render(request,"show_selection.html",context)
 
 def seat_select(request):
     context = {} 
+    if(request.method == "GET" and len(request.GET)==3):
+        id = request.GET['mid']
+        st = request.GET['st']
+        d = request.GET['d']
+        context["film"] = film.objects.get(id = id)
+        context['date'] = d
+        context['st'] = st
     return render(request,"seat_selection.html",context)
 
 def checkout(request):

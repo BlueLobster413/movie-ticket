@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load utils %}
+
+<!-- Header -->
+{% block title %}
+        <title>Book a show</title>
+        <link rel="stylesheet" href="{% static 'css/seat_selection.css' %}">
+        
+        <style>
+          .results{
+            font-family: 'Lato', sans-serif;
+          }
+          .norounds{
+            border-radius:0px;
+          }
+        </style>
+        
+{% endblock title %}
+
+<!-- Content -->
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1 class="btn btn-secondary" >SELECT SHOWTIME </h1>
+    </div>
+    <div class="row">
+        <form method="get" action="#" id="dateform">
+            <div class="form-group row">
+                <label for="selectdate" class="col-sm-2 col-form-label">Select Date</label>
+                <div class="col-sm-4">
+                <input type="date"  name="date" class="form-control-plaintext" value="{% if date %}{{ date }}{% else %}{{"%Y-%m-%d"|cdate }}{% endif %}"   min="{{ "%Y-%m-%d"|cdate }}" max="{{ "%Y-%m-%d"|cdateadd:"7" }}" id="selectdate" value="">
+                </div>
+                
+            </div>
+            <hr>
+        </form>
+    </div>
+    <div class="row">
+        <!-- results -->
+        <div class="container col-md-6 results" >
+            {% if films %}
+                {% for film in films%}
+                    <div class="row" >
+                        <h1>{{ film.movie_name}}</h1>
+                        <div class="form-group">
+                            <a class="btn btn-warning" href="#">{{ film.showtime1 }}</a>
+                        {% comment %} <a class="btn btn-warning norounds" href="/seat?d={{ date }}&st={{ film.showtime1 }}&mid={{ film.id}}">{{ film.showtime1 }}</a>
+                        <a class="btn btn-warning norounds" href="/seat?d={{ date }}&st={{ film.showtime2 }}&mid={{ film.id}}">{{ film.showtime2 }}</a>
+                        <a class="btn btn-warning norounds" href="/seat?d={{ date }}&st={{ film.showtime3 }}&mid={{ film.id}}">{{ film.showtime3 }}</a> {% endcomment %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {%endif%}
+        </div>
+        <!-- Seat -->
+        
+        <div class="sbody col-md-6 h-80">
+            <div class="scontainer">
+              <div class="screen"></div>
+              <div class="srow">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+              </div>
+              <div class="srow">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupied"></div>
+                <div class="seat occupied"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+              </div>
+              <div class="srow">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupied"></div>
+                <div class="seat occupied"></div>
+              </div>
+              <div class="srow">
+                <div class="seat selected"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+              </div>
+              <div class="srow">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupied"></div>
+                <div class="seat occupied"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+              </div>
+              <div class="srow">
+                <div class="seat"></div>
+                <div class="seat occupied"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupied"></div>
+                <div class="seat occupied"></div>
+                <div class="seat"></div>
+              </div>
+            </div>
+        
+            <p class="tex2t">
+              You have selected <span id="count">0</span> seats for the price of $<span
+                id="total"
+                >0</span
+              >!
+            </p>
+        
+            
+          </div>
+        
+        
+        
+
+    </div>
+
+
+</div>
+{% endblock content %}
+
+<!-- JS -->
+{% block js%}
+<script>
+    $( document ).ready(function() {
+        // update movies based on 
+        $("#selectdate").change(function() {
+            console.log($(this).val());
+            console.log("date changed");
+            $("#dateform").submit();
+        });
+
+    });
+</script>
+<script src="{% static 'js/seat_selection.js' %}"></script>
+{% endblock js%}
