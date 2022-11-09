@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
-
 {% load static %}
 {% load utils %}
 
 <!-- Header -->
 {% block title %}
         <title>Book a show</title>
-        <link rel="stylesheet" href="{% static 'css/seat_selection.css' %}">
+        <link rel="stylesheet" href="{% static 'css/seat_selection2.css' %}">
         
         <style>
           .results{
@@ -14,6 +13,10 @@
           }
           .norounds{
             border-radius:0px;
+          }
+          .modal-content{
+            background-color: #242333;
+            color:white;
           }
         </style>
         
@@ -39,24 +42,147 @@
     </div>
     <div class="row">
         <!-- results -->
-        <div class="container col-md-6 results" >
+        <div class="container col-md-8 results" >
+          <p>Movies showing on <b>{{ date }}</b> </p>
             {% if films %}
                 {% for film in films%}
                     <div class="row" >
                         <h1>{{ film.movie_name}}</h1>
                         <div class="form-group">
-                            <a class="btn btn-warning" href="#">{{ film.showtime1 }}</a>
+                            <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter" href="#">{{ film.showtime1 }}</a>
+                            <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter" href="#">{{ film.showtime2 }}</a>
+                            <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter" href="#">{{ film.showtime3 }}</a>
                         {% comment %} <a class="btn btn-warning norounds" href="/seat?d={{ date }}&st={{ film.showtime1 }}&mid={{ film.id}}">{{ film.showtime1 }}</a>
                         <a class="btn btn-warning norounds" href="/seat?d={{ date }}&st={{ film.showtime2 }}&mid={{ film.id}}">{{ film.showtime2 }}</a>
                         <a class="btn btn-warning norounds" href="/seat?d={{ date }}&st={{ film.showtime3 }}&mid={{ film.id}}">{{ film.showtime3 }}</a> {% endcomment %}
+                      
+                      
+                      <!-- Seat Booking -->
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" >
+                              <div class="modal-header" style="border-bottom: None;">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Book tickets</h5>
+                                <button type="button" style="color:white;" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body" >
+                                <!-- Model body-->
+                                <div class="sbodymodal" >
+                                  <div class="scontainer">
+                                    <div class="screen"></div>
+                                    <hr>
+                                    <div class="srow">
+                                      <div class="seatindex">A</div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                    </div>
+                                    <div class="srow">
+                                      <div class="seatindex">B</div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                    </div>
+                                    <div class="srow">
+                                      <div class="seatindex">C</div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat occupied"></div>
+                                    </div>
+                                    <div class="srow">
+                                      <div class="seatindex">D</div>
+                                      <div class="seat selected"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                    </div>
+                                    <div class="srow">
+                                      <div class="seatindex">E</div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                    </div>
+
+                                    <div class="srow">
+                                      <div class="seatindex">F</div>
+                                      <div class="seat"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat occupied"></div>
+                                      <div class="seat"></div>
+                                    </div>
+                                    <div class="srow">
+                                      {% comment %} <div class="seatnumber"></div> {% endcomment %}
+                                      <div class="seatnumber"></div>
+                                      <div class="seatnumber">1</div>
+                                      <div class="seatnumber">2</div>
+                                      <div class="seatnumber">3</div>
+                                      <div class="seatnumber">4</div>
+                                      <div class="seatnumber">5</div>
+                                      <div class="seatnumber">6</div>
+                                      <div class="seatnumber">7</div>
+                                      <div class="seatnumber">8</div>
+                                    </div>
+                                  </div>
+                                  <p>
+                                    <span id="clearselected" style="cursor: pointer;">clear</span>
+                                  </p>
+                                  <p class="tex2t">
+                                    You have selected <span id="count">0</span> seats for the price of $<span
+                                      id="total"
+                                      >0</span
+                                    >!
+                                  </p>
+                              
+                                  
+                                </div>
+                              </div>
+                              <div class="modal-footer" style="border-top:None">
+                                <button type="button" class="btn btn-primary btn-block">Book Tickets</button>
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+
+
+                      </div>
                     </div>
                 {% endfor %}
             {%endif%}
         </div>
         <!-- Seat -->
         
-        <div class="sbody col-md-6 h-80">
+        {% comment %} <div class="sbody col-md-6 h-80">
             <div class="scontainer">
               <div class="screen"></div>
               <div class="srow">
@@ -129,7 +255,7 @@
             </p>
         
             
-          </div>
+          </div> {% endcomment %}
         
         
         
@@ -151,7 +277,14 @@
             $("#dateform").submit();
         });
 
+        $(".seat").click(function (){
+          $(this).toggleClass("selected"); //toggles selected class
+        });
+
+        $("#clearselected").click(function(){
+          //clear all selected seats
+        });
     });
 </script>
-<script src="{% static 'js/seat_selection.js' %}"></script>
+<script src="{% static 'js/seat_selection2.js' %}"></script>
 {% endblock js%}

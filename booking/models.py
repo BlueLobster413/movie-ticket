@@ -7,6 +7,8 @@ from traitlets import default
 # class Users(AbstractUser):
 #     is_theatre_staff = models.BooleanField('staff status', default=False)
 
+# class Account(AbstractUser):
+#     pass
 
 # Create your models here.
 # class users(models.Model):

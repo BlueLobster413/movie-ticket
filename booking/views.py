@@ -47,7 +47,7 @@ def show_select(request):
     if(request.method == "GET" and len(request.GET)!=0):
         # print("get raised")
         date = request.GET['date']
-        films = film.objects.filter(start_date__lte=date).values_list('id','movie_name','url','showtime1','showtime2','showtime3', named=True)
+        films = film.objects.filter(end_date__gte=date).values_list('id','movie_name','url','showtime1','showtime2','showtime3', named=True)
         context = {'films':films,'date':date}
     
     return render(request,"show_selection.html",context)

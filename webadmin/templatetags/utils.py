@@ -4,15 +4,17 @@ register = template.Library()
 
 import datetime
 
-@register.filter(name='cut')
-def cut(value, arg):
-    """Removes all values of arg from the given string"""
-    return value.replace(arg, '')
-
 @register.filter(name="lower")
 def lower(value): # Only one argument.
     """Converts a string into all lowercase"""
     return value.lower()
+
+@register.filter(name="cut")
+def current_date(var,size):
+    if(len(var)<int(size)):
+        return var
+    else:
+        return var[:int(size)]+".."
 
 @register.filter(name="dformat")
 def dformat(date, desired_format):
@@ -42,3 +44,4 @@ def current_date(date_format):
 @register.filter(name="cdateadd")
 def current_date(date_format,days):
     return (datetime.date.today() + datetime.timedelta(days=int(days))).strftime(date_format)
+
