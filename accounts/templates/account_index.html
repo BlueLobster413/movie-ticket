@@ -1,0 +1,13 @@
+<h1>
+Welcome to Accounts App
+</h1>
+
+{% if user.is_authenticated %}
+hello {{ request.user.username }}
+<a href="/logout" > Logout </a>
+<li> <a href="/adminpage"> Go to admin </a></li>
+<li> <a href="/customer"> Go to customer </a></li>
+{% else %}
+<a href="/login" > Signin </a>
+<a href="/register" > Signup </a>
+{% endif %}

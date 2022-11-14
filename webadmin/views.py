@@ -2,8 +2,13 @@ from django.shortcuts import render, HttpResponseRedirect
 from .forms import filmForm
 from .models import film
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
 from django.template.context_processors import csrf
 # Create your views here.
+from accounts.views import staff_required, is_user
+
+# @login_required(login_url='/accounts/adminlogin')
+@user_passes_test(staff_required, login_url='/accounts/adminlogin')
 def index(request):
     context = {}
     return render(request,"dashboard.html",context)
