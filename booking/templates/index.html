@@ -48,7 +48,7 @@
     <section class="py-5 content">
 
         <div class="container px-4 px-lg-5 mt-5">
-
+            {% if films %}
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 
             {% for film in films %}
@@ -66,11 +66,16 @@
                     </a>
                 </div>
             {% endfor %}
+            
 
                     
             
 
                 </div>
+                {% else %}
+            <h1> There are no shows currently running </h1>
+            <h5> try again later . . . </h5>
+            {% endif %}
             </div>
         </section>
 {% endblock content %}
