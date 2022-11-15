@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e_h%5f=0rgjm3(9ps49lt*t+actcc=wuzvi_69$ry(!^v6vlr#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'movieticket.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
